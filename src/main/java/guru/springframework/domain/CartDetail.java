@@ -1,15 +1,15 @@
 package guru.springframework.domain;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 @Entity
-public class Product {
+public class CartDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,9 +18,11 @@ public class Product {
     @Version
     private Integer version;
 
-    private String description;
-    private BigDecimal price;
-    private String imageUrl;
+    @ManyToOne
+    private Cart cart;
+
+    @OneToOne
+    private Product product;
 
     public Integer getId() {
         return id;
@@ -38,27 +40,19 @@ public class Product {
         this.version = version;
     }
 
-    public String getDescription() {
-        return description;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
